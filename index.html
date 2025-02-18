@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huizi</title>
+</head>
+
+<style>
+    body {
+        background-color: black;
+        max-width: 100vw;
+        max-height: 100vh;
+        overflow: hidden;
+    }
+    .default {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(1.jpg);
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .clicked {
+        background-image: url(2.jpg);
+    }
+</style>
+
+<body>
+    <div id="button" class="default"></div>
+    <audio id="sound1" src="sound1.wav" style="display: none;"></audio>
+    <audio id="sound2" src="sound2.wav" style="display: none;"></audio>
+
+    <script>
+        let stateSound = 1
+
+        document.getElementById("button").addEventListener("click", function() {
+            this.classList.toggle("clicked"); // Alterna entre las clases
+
+            if (stateSound === 1) {
+                let audio = document.getElementById("sound1");
+                audio.currentTime = 0; // Reinicia el audio si ya está sonando
+                audio.play();
+                stateSound = 2
+            }else {
+                let audio = document.getElementById("sound2");
+                audio.currentTime = 0; // Reinicia el audio si ya está sonando
+                audio.play();
+            }
+
+            setTimeout(() => {
+                this.classList.remove("clicked"); // Vuelve a la clase "default" después de 0.5s
+            }, 250);
+
+        });
+    </script>
+</body>
+
+
+</html>
